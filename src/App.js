@@ -7,6 +7,8 @@ import { createUseStyles } from "react-jss";
 import Navbar from "./components/Navbar";
 import Inicio from "./components/Inicio";
 import BottomNavbar from "./components/BottomNavbar";
+import SectionList from "./components/SectionList";
+import ShopCart from "./components/ShopCart";
 
 function App() {
 	const classes = useStyles();
@@ -15,6 +17,7 @@ function App() {
 			<Router>
 				<Navbar />
 				<div className={classes.container}>
+					<SectionList />
 					<Switch>
 						<Route exact path='/'>
 							<Inicio />
@@ -24,6 +27,9 @@ function App() {
 						</Route>
 						<Route exact path='/count'>
 							<CountDisplay />
+						</Route>
+						<Route exact path='/cart'>
+							<ShopCart />
 						</Route>
 					</Switch>
 				</div>
@@ -54,9 +60,10 @@ const useStyles = createUseStyles({
 	},
 	container: {
 		width: "80%",
-		minHeight: "80vh",
+		minHeight: "70vh",
 		margin: "auto",
 		textAlign: "center",
+		padding: "5vh 0",
 	},
 });
 

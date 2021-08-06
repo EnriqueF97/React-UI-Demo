@@ -20,16 +20,24 @@ export default function Button(props) {
 }
 
 const useStyles = createUseStyles({
+	container: {
+		height: "parent",
+		marginTop: "calc(9px + 1vm)",
+		marginBottom: "calc(9px + 1vm)",
+	},
 	myButton: {
-		margin: "3px",
+		margin: "1.3vh",
 		background: (props) => props.backgroundColor,
 		border: "none",
 		padding: "10px 24px",
 		textAlign: "center",
 		textDecoration: "none",
 		display: "inline-block",
-		fontSize: "1em",
-		borderRadius: "8px",
+		borderRadius: "10px",
+		fontSize: "calc(9px + 1vmin)",
 		color: (props) => props.fontColor,
+		"&:hover": {
+			cursor: "pointer",
+		},
 	},
 });
