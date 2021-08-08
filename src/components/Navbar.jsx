@@ -5,33 +5,36 @@ import Button from "./Button";
 import NavbarButton from "./NavbarButton";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function Navbar() {
+export default function Navbar(props) {
 	const history = useHistory();
 	const location = useLocation();
 	const classes = useStyles();
-	const count = useSelector((state) => state.counter.value);
+	const count = useSelector((state) => state.shopCart.count);
 	const [links, setLinks] = React.useState([
 		{ ref: "/", text: "Inicio", key: "inicio", active: true },
-		{ ref: "/titulo", text: "Titulo", key: "titulo", active: false },
-		{ ref: "/count", text: "Count", key: "count", active: false },
-		{ ref: "/cart", text: "Cart", key: "cart", active: false },
+		{ ref: "/catalog", text: "Personajes", key: "character", active: false },
+		{ ref: "/catalog", text: "Ubicaciones", key: "location", active: false },
+		{ ref: "/catalog", text: "Episodios", key: "episode", active: false },
+		//{ ref: "/cart", text: "Cart", key: "cart", active: false },
 	]);
 
-	const handleOnSelect = (selected) => {
-		const to = selected;
+	const handleOnSelect = ({ ref, key }) => {
+		console.log("Navbar - selected", key);
+		props.onSelect(key);
+
+		const to = ref;
 		if (location.pathname !== to) {
 			history.push(to);
 		}
 
-		resetNavActives(selected);
+		resetNavActives(key);
 	};
 
 	const resetNavActives = (selected = "not") => {
-		console.log("selected", selected);
 		let newLinks = [...links];
-		newLinks.map((link) => {
+		newLinks.forEach((link) => {
 			link.active = true;
-			if (link.ref !== selected) link.active = false;
+			if (link.key !== selected) link.active = false;
 		});
 		setLinks(newLinks);
 	};
@@ -50,21 +53,19 @@ export default function Navbar() {
 					key={link.key}
 					active={link.active}
 					text={link.text}
-					onSelect={() => handleOnSelect(link.ref)}
+					onSelect={() => handleOnSelect(link)}
 				/>
 			))}
-			<li style={{ height: "5vh", paddingTop: "auto", paddingBottom: "auto", float: "right" }}>
+			<div style={{ height: "100%", display: "flex", float: "right", padding: "auto 0" }}>
 				<Button
 					text={`Cart: ${count}`}
 					backgroundColor='#e3a600'
+					key={"cart"}
 					func={() => {
-						if (location.pathname !== "/cart") {
-							history.push("/cart");
-							resetNavActives();
-						}
+						handleOnSelect({ ref: "/cart", key: "cart" });
 					}}
 				/>
-			</li>
+			</div>
 		</ul>
 	);
 }
@@ -82,39 +83,17 @@ const useStyles = createUseStyles({
 		float: "left",
 		"&:hover": {
 			color: "blue",
-			cursor: "pointer",
+			cursor: "",
 		},
 		"& span": {
 			display: "block",
 			color: "white",
 			textAlign: "center",
-			padding: "calc(10px + 1vmin)",
+			padding: "calc(2px + 1vmin)",
 			textDecoration: "none",
 			fontSize: "calc(10px + 2vmin)",
 		},
-	},
-	li_selected: {
-		float: "left",
-		"&:hover": {
-			color: "blue",
-			cursor: "pointer",
-		},
-		"& span": {
-			display: "block",
-			color: "white",
-			textAlign: "center",
-			padding: "calc(10px + 1vmin)",
-			textDecoration: "none",
-			fontSize: "calc(10px + 2vmin)",
-			backgroundColor: "#2b2a2a",
-		},
-	},
-	link: {
-		display: "block",
-		color: "white",
-		textAlign: "center",
-		padding: "14px 16px",
-		textDecoration: "none",
+		height: "90%",
 	},
 	myLabel: {
 		fontStyle: "italic",

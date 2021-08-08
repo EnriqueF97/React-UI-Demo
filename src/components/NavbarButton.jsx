@@ -5,9 +5,7 @@ export default function NavbarButton(props) {
 	const classes = useStyles(props);
 	return (
 		<li className={classes.li}>
-			<span key={props.key} onClick={props.onSelect}>
-				{props.text}
-			</span>
+			<span onClick={props.onSelect}>{props.text}</span>
 		</li>
 	);
 }

@@ -13,7 +13,10 @@ export default function Button(props) {
 	};
 
 	return (
-		<button className={classes.myButton} onClick={props.func}>
+		<button
+			className={classes[`myButton${props.active ? "Active" : ""}`]}
+			onClick={props.func}
+			disabled={props.inactive === true}>
 			{props.text !== undefined ? props.text : "text?"}
 		</button>
 	);
@@ -22,22 +25,38 @@ export default function Button(props) {
 const useStyles = createUseStyles({
 	container: {
 		height: "parent",
-		marginTop: "calc(9px + 1vm)",
-		marginBottom: "calc(9px + 1vm)",
+		marginTop: "auto",
+		marginBottom: "auto",
+		display: "flex",
 	},
 	myButton: {
-		margin: "1.3vh",
+		margin: (props) => (props.small ? "0.7vh" : "1vmin 0.9vh"),
 		background: (props) => props.backgroundColor,
 		border: "none",
-		padding: "10px 24px",
+		padding: (props) => (props.small ? "calc(0.7vmin)" : "calc(4px + 1vmin)"),
 		textAlign: "center",
 		textDecoration: "none",
-		display: "inline-block",
-		borderRadius: "10px",
-		fontSize: "calc(9px + 1vmin)",
+		display: "flex",
+		borderRadius: (props) => (props.small ? "5px" : "8px"),
+		fontSize: (props) => (props.small ? "calc(5px + 1vmin)" : "calc(9px + 1 vmin)"),
 		color: (props) => props.fontColor,
 		"&:hover": {
 			cursor: "pointer",
 		},
+	},
+	myButtonActive: {
+		margin: (props) => (props.small ? "0.7vh" : "0.9vh"),
+		background: (props) => props.backgroundColor,
+		padding: (props) => (props.small ? "calc(0.7vmin)" : "calc(4px + 1vmin)"),
+		textAlign: "center",
+		textDecoration: "none",
+		display: "inline-block",
+		borderRadius: (props) => (props.small ? "5px" : "8px"),
+		fontSize: (props) => (props.small ? "calc(5px + 1vmin)" : "calc(9px + 1 vmin)"),
+		color: (props) => props.fontColor,
+		"&:hover": {
+			cursor: "pointer",
+		},
+		border: "2px solid #e6e6e6",
 	},
 });

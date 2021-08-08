@@ -15,66 +15,31 @@ export default function Titulo(props) {
 	return (
 		<>
 			<div>
+				<span>User: {currentUser.firstName}</span>
+				<span>Count: {count}</span>
+			</div>
+			<div style={{ display: "block" }}>
 				<Button
 					fontColor='black'
 					backgroundColor='#e0c134'
 					aria-label='Decrement value'
 					text='Decrement'
 					func={() => dispatch(decrement())}
+				/>{" "}
+				<Button
+					text='Increment'
+					backgroundColor='#e0c134'
+					aria-label='Increment value'
+					func={() => dispatch(increment())}
 				/>
 				<div>
-					<span>User: {currentUser.firstName}</span>
-				</div>
-				<div>
-					<span>Count: {count}</span>
-				</div>
-				<Button text='Increment' aria-label='Increment value' func={() => dispatch(increment())} />
-
-				<div>
-					<div className='col' style={{ alignItems: "center" }}></div>
-					<div className='col'>
-						<Button
-							text='Set Current User'
-							backgroundColor='#e8cb48'
-							func={() =>
-								dispatch(
-									setCurrentUser({
-										firstName: "Enrique",
-										lastName: "Favila",
-									})
-								)
-							}></Button>
-						<Button
-							text='Set Current Company'
-							backgroundColor='#e8cb48'
-							func={() =>
-								dispatch(
-									setCurrentCompany({
-										nombre: "TestCompany",
-										companyUsers: [
-											{
-												user1: "user1",
-											},
-											{
-												user2: "user2",
-											},
-										],
-									})
-								)
-							}
-						/>
-					</div>
-				</div>
-
-				<div>
-					<div className='col' xs={12}>
-						<Button
-							variant='primary'
-							text='Ir a counter'
-							func={() => {
-								history.push("/count");
-							}}></Button>
-					</div>
+					<Button
+						variant='primary'
+						text='Ir a counter'
+						backgroundColor='#e0c134'
+						func={() => {
+							history.push("/count");
+						}}></Button>
 				</div>
 			</div>
 		</>

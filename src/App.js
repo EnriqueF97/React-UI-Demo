@@ -9,26 +9,54 @@ import Inicio from "./components/Inicio";
 import BottomNavbar from "./components/BottomNavbar";
 import SectionList from "./components/SectionList";
 import ShopCart from "./components/ShopCart";
+import { useState } from "react";
+import DisplayFullItem from "./components/DisplayFullItem";
 
 function App() {
+	const [apiSection, setApiSection] = useState("character");
 	const classes = useStyles();
+
+	const [currentItem, setCurrentItem] = useState({});
+
+	const handleSetNewSection = (url) => {
+		console.log("App - newSection", url);
+		setApiSection(url);
+	};
+	const handleSelectItem = (item) => {
+		console.log("App - selectedItem", item);
+		setCurrentItem(item);
+	};
+
 	return (
 		<div className={classes.viewport}>
 			<Router>
-				<Navbar />
+				<Navbar onSelect={(selected) => handleSetNewSection(selected)} />
 				<div className={classes.container}>
-					<SectionList />
 					<Switch>
 						<Route exact path='/'>
+							{/**
+							 *  Componente Inicio (Instrucciones, presentación)
+							 */}
 							<Inicio />
 						</Route>
-						<Route exact path='/titulo'>
-							<Titulo />
-						</Route>
-						<Route exact path='/count'>
-							<CountDisplay />
+						<Route exact path='/catalog'>
+							{/**
+							 * Componente Sectionlist    apiSection = {apiSection}
+							 *
+							 * Componente FullItem   item = {item}
+							 */}
+							<SectionList
+								onSelect={(item) => handleSelectItem(item)}
+								apiSection={apiSection}
+								pageLimit={3}
+								dataLimit={4}
+							/>
+							<DisplayFullItem data={currentItem} />
 						</Route>
 						<Route exact path='/cart'>
+							{/**
+							 *  Componente Cart (Store de redux)
+							 */}
 							<ShopCart />
 						</Route>
 					</Switch>
@@ -55,12 +83,16 @@ const useStyles = createUseStyles({
 	viewport: {
 		backgroundColor: "#282c34",
 		minHeight: "100vh",
+		width: "100%",
 		fontFamily: "sans-serif",
 		color: "lightGray",
 	},
 	container: {
 		width: "80%",
-		minHeight: "70vh",
+		height: "100%",
+		minHeight: "75vh",
+		alignItems: "center",
+		justifyContent: "left",
 		margin: "auto",
 		textAlign: "center",
 		padding: "5vh 0",
