@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
-import { useSelector, useDispatch } from "react-redux";
 import Button from "./Button";
 import ListItem from "./ListItem";
 import axios from "axios";
 import { Spinner } from "react-bootstrap";
 
-export default function SectionList({ apiSection, onSelect, ...props }) {
+export default function SectionList({ apiSection, ...props }) {
 	const classes = useStyles();
-	const dispatch = useDispatch();
 	const [data, setData] = useState([{ id: 0, name: "" }]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageLimit] = useState(5);
@@ -30,7 +28,7 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 
 				if (response.status === 200) {
 					const fetchedDataArray = response.data.results;
-					onSelect(fetchedDataArray[0]);
+					props.onSelect(fetchedDataArray[0]);
 					return setData(fetchedDataArray);
 				}
 
@@ -54,7 +52,7 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 
 	const onSelectItem = (item) => {
 		console.log("func!", item);
-		onSelect(item);
+		props.onSelect(item);
 	};
 
 	const goToNextPage = () => {

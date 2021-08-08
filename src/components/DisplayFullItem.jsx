@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { addItem } from "../features/shopCart/shopCartSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createUseStyles } from "react-jss";
 import Button from "./Button";
 
 export default function DisplayFullItem({ data }) {
-	const [keys, setKeys] = useState([]);
 	const classes = useStyles();
 	const dispatch = useDispatch();
 

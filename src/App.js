@@ -1,7 +1,5 @@
 //import logo from "./logo.svg";
 import "./App.css";
-import Titulo from "./components/Titulo";
-import CountDisplay from "./components/CountDisplay";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createUseStyles } from "react-jss";
 import Navbar from "./components/Navbar";
