@@ -1,29 +1,61 @@
 //import logo from "./logo.svg";
 import "./App.css";
-import Titulo from "./components/Titulo";
-import CountDisplay from "./components/CountDisplay";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createUseStyles } from "react-jss";
 import Navbar from "./components/Navbar";
 import Inicio from "./components/Inicio";
 import BottomNavbar from "./components/BottomNavbar";
+import SectionList from "./components/SectionList";
+import ShopCart from "./components/ShopCart";
+import { useState } from "react";
+import DisplayFullItem from "./components/DisplayFullItem";
 
 function App() {
+	const [apiSection, setApiSection] = useState("character");
 	const classes = useStyles();
+
+	const [currentItem, setCurrentItem] = useState({});
+
+	const handleSetNewSection = (url) => {
+		console.log("App - newSection", url);
+		setApiSection(url);
+	};
+	const handleSelectItem = (item) => {
+		console.log("App - selectedItem", item);
+		setCurrentItem(item);
+	};
+
 	return (
 		<div className={classes.viewport}>
 			<Router>
-				<Navbar />
+				<Navbar onSelect={(selected) => handleSetNewSection(selected)} />
 				<div className={classes.container}>
 					<Switch>
 						<Route exact path='/'>
+							{/**
+							 *  Componente Inicio (Instrucciones, presentación)
+							 */}
 							<Inicio />
 						</Route>
-						<Route exact path='/titulo'>
-							<Titulo />
+						<Route exact path='/catalog'>
+							{/**
+							 * Componente Sectionlist    apiSection = {apiSection}
+							 *
+							 * Componente FullItem   item = {item}
+							 */}
+							<DisplayFullItem data={currentItem} />
+							<SectionList
+								onSelect={(item) => handleSelectItem(item)}
+								apiSection={apiSection}
+								pageLimit={3}
+								dataLimit={4}
+							/>
 						</Route>
-						<Route exact path='/count'>
-							<CountDisplay />
+						<Route exact path='/cart'>
+							{/**
+							 *  Componente Cart (Store de redux)
+							 */}
+							<ShopCart />
 						</Route>
 					</Switch>
 				</div>
@@ -49,14 +81,19 @@ const useStyles = createUseStyles({
 	viewport: {
 		backgroundColor: "#282c34",
 		minHeight: "100vh",
+		width: "100%",
 		fontFamily: "sans-serif",
 		color: "lightGray",
 	},
 	container: {
-		width: "80%",
+		width: "100%",
+		height: "100%",
 		minHeight: "80vh",
+		alignItems: "center",
+		justifyContent: "left",
 		margin: "auto",
 		textAlign: "center",
+		padding: "5vh 0",
 	},
 });
 
