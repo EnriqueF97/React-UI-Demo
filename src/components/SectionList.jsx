@@ -5,7 +5,7 @@ import ListItem from "./ListItem";
 import axios from "axios";
 import { Spinner } from "react-bootstrap";
 
-export default function SectionList({ apiSection, ...props }) {
+export default function SectionList({ apiSection, onSelect, ...props }) {
 	const classes = useStyles();
 	const [data, setData] = useState([{ id: 0, name: "" }]);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -28,7 +28,7 @@ export default function SectionList({ apiSection, ...props }) {
 
 				if (response.status === 200) {
 					const fetchedDataArray = response.data.results;
-					props.onSelect(fetchedDataArray[0]);
+					onSelect(fetchedDataArray[0]);
 					return setData(fetchedDataArray);
 				}
 
@@ -52,7 +52,7 @@ export default function SectionList({ apiSection, ...props }) {
 
 	const onSelectItem = (item) => {
 		console.log("func!", item);
-		props.onSelect(item);
+		onSelect(item);
 	};
 
 	const goToNextPage = () => {
@@ -89,50 +89,49 @@ export default function SectionList({ apiSection, ...props }) {
 					</div>
 				</>
 			) : (
-				<>
-					<div style={{ height: "100%" }}>
-						{/* show the posts, 10 posts at a time */}
-						<div>
-							{getPaginatedData().map((data, idx) => (
-								<>
-									<ListItem func={() => onSelectItem(data)} key={idx} {...data} />
-								</>
-							))}
-						</div>
-
-						<div className={classes.pagination}>
-							{/* previous button */}
-							<Button
-								func={goToPreviousPage}
-								text='Anterior'
-								backgroundColor='#083070'
-								active={""}
-								fontColor='white'
-							/>
-
-							{/* page numbers */}
-							{getPaginationGroup().map((item, index) => (
-								<Button
-									key={index}
-									active={currentPage === item}
-									func={changePage}
-									text={item}
-									backgroundColor='#0b46a3'
-									fontColor='white'
-								/>
-							))}
-
-							{/* next button */}
-							<Button
-								func={goToNextPage}
-								inactive={currentPage >= pages}
-								text='Siguiente'
-								backgroundColor='#083070'
-								fontColor='white'
-							/>
-						</div>
+				<div style={{ height: "100%", paddingInline: "2vmin" }}>
+					{/* show the posts, 10 posts at a time */}
+					<div>
+						{getPaginatedData().map((data, idx) => (
+							<>
+								<ListItem func={() => onSelectItem(data)} key={`${idx}s`} {...data} />
+							</>
+						))}
 					</div>
-				</>
+
+					<div className={classes.pagination}>
+						{/* previous button */}
+						<Button
+							func={goToPreviousPage}
+							text='Anterior'
+							backgroundColor='#083070'
+							active={""}
+							fontColor='white'
+						/>
+
+						{/* page numbers */}
+						{getPaginationGroup().map((item, index) => (
+							<Button
+								key={`_${index}_`}
+								active={currentPage === item}
+								func={changePage}
+								text={item}
+								backgroundColor='#0b46a3'
+								fontColor='white'
+								small
+							/>
+						))}
+
+						{/* next button */}
+						<Button
+							func={goToNextPage}
+							inactive={currentPage >= pages}
+							text='Siguiente'
+							backgroundColor='#083070'
+							fontColor='white'
+						/>
+					</div>
+				</div>
 			)}
 		</>
 	);
@@ -143,6 +142,7 @@ const useStyles = createUseStyles({
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center",
+		paddingInline: "5vmin",
 	},
 	paginationItem: {
 		background: "#fff",

@@ -43,13 +43,13 @@ function App() {
 							 *
 							 * Componente FullItem   item = {item}
 							 */}
+							<DisplayFullItem data={currentItem} />
 							<SectionList
 								onSelect={(item) => handleSelectItem(item)}
 								apiSection={apiSection}
 								pageLimit={3}
 								dataLimit={4}
 							/>
-							<DisplayFullItem data={currentItem} />
 						</Route>
 						<Route exact path='/cart'>
 							{/**

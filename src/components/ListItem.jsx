@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { createUseStyles } from "react-jss";
 
-export default function ListItem({ id, name, ...props }) {
-	const [data, setData] = useState(props);
+export default function ListItem({ id, name, func, ...props }) {
+	const classes = useStyles(props);
 
-	useEffect(() => {
-		//	console.log("data", data);
-	});
 	return (
 		<div>
-			<span onClick={props.func} style={{ fontSize: "2.5em", display: "block", lineHeight: "2" }} key={id}>
+			<span
+				onClick={func}
+				style={{ fontSize: "calc(10px + 4vmin)", display: "block", lineHeight: "1.5" }}
+				key={id}>
 				{name}
 			</span>
 		</div>
 	);
 }
+
+const useStyles = createUseStyles({});
