@@ -14,17 +14,20 @@ export default function DisplayFullItem({ data }) {
 		setImageUrl(data.image);
 	}, [data]);
 
+	/**Metodo para hacer un dispatch a la store añadiendo un nuevo elemento */
 	const addItemToStore = (data) => {
 		if (data.image === undefined) data.image = Logo;
 		dispatch(addItem(data));
 	};
 
+	/**Metodo para imprimir un arreglo en JSX */
 	const printArray = (data) => {
 		const listItems = data.map((item) => <span style={{ fontSize: "0.6em", display: "block" }}>{item}</span>);
 
 		return listItems.length;
 	};
 
+	/**Metodo para imprimir un objeto en JSX */
 	const printObject = (data) => {
 		const listItems = Object.keys(data).map((key) => (
 			<>
@@ -63,7 +66,6 @@ export default function DisplayFullItem({ data }) {
 				)}
 			</>
 		));
-		//console.log("printing object", data);
 		return <span>{listItems}</span>;
 	};
 
@@ -106,7 +108,6 @@ export default function DisplayFullItem({ data }) {
 				)}
 			</>
 		));
-		//console.log("printing object", data);
 		return <ul>{listItems}</ul>;
 	};
 
@@ -125,7 +126,7 @@ export default function DisplayFullItem({ data }) {
 			</div>
 			<div className={classes.addItemContainer}>
 				<Button
-					backgroundColor='#d2ff2e'
+					backgroundColor='#4eba06'
 					text='Añadir al carrito'
 					func={() => {
 						addItemToStore(data);

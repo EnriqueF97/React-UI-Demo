@@ -10,27 +10,28 @@ export default function NavbarButton(props) {
 	);
 }
 
+/**Estilos */
 const useStyles = createUseStyles({
 	li: {
 		float: "left",
-		"&:hover": {
-			color: "blue",
-			cursor: "pointer",
-		},
 		"& span": {
 			display: "block",
 			color: "white",
 			textAlign: "center",
 			padding: "calc(10px + 1vmin)",
 			textDecoration: "none",
-			fontSize: "calc(10px + 2vmin)",
+			fontSize: "calc(7px + 2vmin)",
 			borderRadius: "6px",
-			backgroundColor: (props) => (props.active === true ? "#2b2a2a" : "#333"),
+			background: (props) => (props.active === true ? "#2b2a2a" : "#333"),
+			"&:hover": {
+				background: "#2b2a2a",
+				cursor: "pointer",
+				transition: "background .2s",
+			},
 		},
 	},
 	link: {
 		display: "block",
-		color: "white",
 		textAlign: "center",
 		padding: "14px 16px",
 		textDecoration: "none",

@@ -17,7 +17,7 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 	});
 
 	useEffect(() => {
-		//fetch de axios con props
+		/** fetch de axios con props */
 		async function fetchData() {
 			if (apiSection !== "/") {
 				handleControl("isLoading", true);
@@ -36,9 +36,13 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 			}
 		}
 		fetchData();
-		//props.onSelect(data[0]);
 	}, [apiSection]);
 
+	useEffect(() => {
+		setPages(Math.round(data.length / dataLimit));
+	}, [data, dataLimit]);
+
+	/**Metodo necesario para controlar el componente de cargando... Activa y desactiva la retroalimentación */
 	const handleControl = (control, value) => {
 		setControl((prevState) => ({
 			...prevState,
@@ -46,34 +50,35 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 		}));
 	};
 
-	useEffect(() => {
-		setPages(Math.round(data.length / dataLimit));
-	}, [data, dataLimit]);
-
+	/**Al ser seleccionado un item, llama al metodo padre onSelect */
 	const onSelectItem = (item) => {
-		console.log("func!", item);
 		onSelect(item);
 	};
 
+	/**Ajusta el numero de pagina actual a uno más */
 	const goToNextPage = () => {
 		setCurrentPage((page) => page + 1);
 	};
 
+	/**Ajusta el numero de pagina actual a uno menos */
 	const goToPreviousPage = () => {
 		if (currentPage > 1) setCurrentPage((page) => page - 1);
 	};
 
+	/**Cambia el numero de pagina con un botón especifico de pagina (numerico) */
 	const changePage = (event) => {
 		const pageNumber = Number(event.target.innerText);
 		setCurrentPage(pageNumber);
 	};
 
+	/**Funcion que retorna la informacion de data a partir de la pagina actual hasta un limite establecido con un slice. */
 	function getPaginatedData() {
 		const startIndex = currentPage * dataLimit - dataLimit;
 		const endIndex = startIndex + dataLimit;
 		return data.slice(startIndex, endIndex);
 	}
 
+	/** Funcion que retorna el numero de botones de pagina siguiente ([1, 2, 3] => [4, 5, 6]) */
 	const getPaginationGroup = () => {
 		let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
 		return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
@@ -81,6 +86,7 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 
 	return (
 		<>
+			{/* Si isLoading es true, se muestra el componente de carga, este se prende y apaga al hacer fetch. */}
 			{control.isLoading ? (
 				<>
 					<div style={{ padding: "2em" }}>
@@ -89,8 +95,8 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 					</div>
 				</>
 			) : (
-				<div style={{ height: "100%", paddingInline: "2vmin" }}>
-					{/* show the posts, 10 posts at a time */}
+				<div className={classes.paginationContainer}>
+					{/* Muestra la información de data seleccionada a partir de un indice inicial hasta un final */}
 					<div>
 						{getPaginatedData().map((data, idx) => (
 							<>
@@ -100,7 +106,7 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 					</div>
 
 					<div className={classes.pagination}>
-						{/* previous button */}
+						{/* Botón para pagina anterior */}
 						<Button
 							func={goToPreviousPage}
 							text='Anterior'
@@ -109,7 +115,7 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 							fontColor='white'
 						/>
 
-						{/* page numbers */}
+						{/* Elementos cambio de página, de acuerdo al numero limite de paginas establecido en pagesLimit */}
 						{getPaginationGroup().map((item, index) => (
 							<Button
 								key={`_${index}_`}
@@ -122,7 +128,7 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 							/>
 						))}
 
-						{/* next button */}
+						{/* Boton para pagina siguiente */}
 						<Button
 							func={goToNextPage}
 							inactive={currentPage >= pages}
@@ -137,7 +143,15 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 	);
 }
 
+/**Estilos */
 const useStyles = createUseStyles({
+	paginationContainer: {
+		height: "100%",
+		width: "50vmin",
+		margin: "auto",
+		marginTop: "2em",
+		border: "1em",
+	},
 	pagination: {
 		display: "flex",
 		alignItems: "center",
