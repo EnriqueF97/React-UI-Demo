@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+## Descripción
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Un proyecto con React.js con diseño responsivo minimalista, donde se muestran algunos personajes y entidades del universo de Rick & Morty utilizando la API REST de Rick & Morty. Este proyecto fue creado con el comando [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Contribuidor
 
-In the project directory, you can run:
+Enrique Favila Martínez.
+
+## Obtén este repositorio
+
+Clona este repositorio ejecutando este comando en la consola de git:
+
+### `git clone https://github.com/EnriqueF97/React-UI-Demo.git`
+
+## Pre-requisitos
+
+Node.js (14.x)
+
+## Scripts
+
+En el directorio del proyecto, ejecuta:
+
+### `npm install`
+
+Instalará las dependencias necesarias para la ejecución del proyecto. \ATENCIÓN: De no hacer este paso el proyecto no se ejecutará correctamente.
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ejecutará la aplicación en modo de desarrollo.\
+Abre [http://localhost:3000](http://localhost:3000) para visualizar en el navegador.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Creará una version de produccion del proyecto optimizada.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `serve -s build`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ejecutará la aplicación en modo de producción.\
+Abre [http://localhost:5000](http://localhost:5000) para visualizar en el navegador.
 
-### `npm run eject`
+## APIs
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+El proyecto utiliza el [API de Rick & Morty](https://rickandmortyapi.com/) para obtener la información desplegada.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Librerías
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Se utilizó bootstrap para el componente de indicador de carga.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Información importante
 
-## Learn More
+El proyecto requiere de una conexión constante a internet.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Bugs identificados
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+En el repositorio de GitHub se detallan algunos bugs identificados.
 
-### Code Splitting
+## Aprende cómo utilizar React
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Puedes leer más en la [documentación de Create React App](https://facebook.github.io/create-react-app/docs/getting-started).
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To learn React, check out the [Documentación de React](https://reactjs.org/).

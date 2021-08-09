@@ -5,6 +5,9 @@ import { createUseStyles } from "react-jss";
 export default function Button(props) {
 	const classes = useStyles(props);
 
+	/**Se utiliza proptypes para prevenir errores al usar el botón, es un componente con muchos props posibles
+	 * por lo tanto se debe mantener con la menor variación no deseada.
+	 */
 	Component.propTypes = {
 		backgroundColor: PropTypes.string,
 		fontColor: PropTypes.string,
@@ -22,6 +25,7 @@ export default function Button(props) {
 	);
 }
 
+/**Estilos */
 const useStyles = createUseStyles({
 	container: {
 		height: "parent",

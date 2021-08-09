@@ -16,12 +16,13 @@ function App() {
 
 	const [currentItem, setCurrentItem] = useState({});
 
+	/**Metodo para seleccionar una nueva uri, react router "rutea" y muestra un componente de acuerdo a la URL */
 	const handleSetNewSection = (url) => {
-		console.log("App - newSection", url);
 		setApiSection(url);
 	};
+
+	/**Metodo para establecer un item que se pasará a DisplayFullItem para visualizarse */
 	const handleSelectItem = (item) => {
-		console.log("App - selectedItem", item);
 		setCurrentItem(item);
 	};
 

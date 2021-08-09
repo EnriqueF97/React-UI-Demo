@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createUseStyles } from "react-jss";
 
 export default function ListItem({ id, name, func, ...props }) {
@@ -13,6 +13,7 @@ export default function ListItem({ id, name, func, ...props }) {
 	);
 }
 
+/**Estilos */
 const useStyles = createUseStyles({
 	span: {
 		fontSize: "calc(10px + 4vmin)",

@@ -18,8 +18,8 @@ export default function Navbar(props) {
 		//{ ref: "/cart", text: "Cart", key: "cart", active: false },
 	]);
 
+	/**Metodo para seleccionar una nueva url y darsela al metodo padre, al hacerlo también cambia los estilos dinamicamente */
 	const handleOnSelect = ({ ref, key }) => {
-		console.log("Navbar - selected", key);
 		props.onSelect(key);
 
 		const to = ref;
@@ -30,26 +30,22 @@ export default function Navbar(props) {
 		resetNavActives(key);
 	};
 
-	const resetNavActives = (selected = "not") => {
+	/**Metodo para cambiar los estilos, al saber que key se seleccionó, activa su estilo y
+	 * desactiva el de los demás botones*/
+	const resetNavActives = (key = "not") => {
 		let newLinks = [...links];
 		newLinks.forEach((link) => {
 			link.active = true;
-			if (link.key !== selected) link.active = false;
+			if (link.key !== key) link.active = false;
 		});
 		setLinks(newLinks);
 	};
-
-	/** TO DO
-	 * Crear un componente boton para la navbar generico que requiera de text, color, y una funcion
-	 * El color se lo pasas por props a jss para que le de estilo
-	 * En navbar tu decides que color le das a cada uno al hacer click!
-	 * Con esto ya tienes el render de color condicional para cada boton!!!
-	 */
 
 	return (
 		<div className={classes.navbar}>
 			<ul className={classes.ul}>
 				<li className={classes.li} style={{ height: "100%" }}>
+					{/* Logo */}
 					<div className={classes.imageContainer}>
 						<img
 							onClick={() => handleOnSelect({ ref: "/", key: "inicio" })}
@@ -59,6 +55,7 @@ export default function Navbar(props) {
 						/>
 					</div>
 				</li>
+				{/* Botones, se crean componentes NavbarButton dinamicamente a partir del arreglo de links[] */}
 				{links.map((link) => (
 					<NavbarButton
 						key={link.key}
@@ -67,6 +64,7 @@ export default function Navbar(props) {
 						onSelect={() => handleOnSelect(link)}
 					/>
 				))}
+				{/* Boton de ShopCart */}
 				<div style={{ height: "100%", display: "flex", float: "right", padding: "auto 0" }}>
 					<Button
 						text={`Cart: ${count}`}
@@ -83,6 +81,7 @@ export default function Navbar(props) {
 	);
 }
 
+/**Estilos */
 const useStyles = createUseStyles({
 	navbar: {
 		position: "fixed",

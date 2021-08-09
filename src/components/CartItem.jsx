@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteItem, addItem } from "../features/shopCart/shopCartSlice";
 import { createUseStyles } from "react-jss";
 import Button from "./Button";
@@ -8,23 +8,27 @@ export default function CartItem({ item, ...props }) {
 	const classes = useStyles(props);
 	const dispatch = useDispatch();
 
+	/**Metodo para hacer un dispatch borrando un item especifico */
 	const onDeleteItem = (item) => {
-		console.log("deleting", item);
 		dispatch(deleteItem(item));
 	};
 
+	/**Metodo para hacer un dispatch añadiendo un item a la store */
 	const onAddItem = (item) => {
 		dispatch(addItem(item));
 	};
 
 	return (
 		<div className={classes.container}>
+			{/* Imagen */}
 			<div className={classes.imageContainer}>
 				<img className={classes.image} src={item.image} alt='item' />
 			</div>
+			{/* Nombre del item */}
 			<span className={classes.span}>
 				{item.name.length > 30 ? item.name.substr(0, 30) + "..." : item.name}
 			</span>
+			{/* Acciones para el item */}
 			<div className={classes.buttonContainer}>
 				<Button
 					func={() => onAddItem(item)}
@@ -42,12 +46,12 @@ export default function CartItem({ item, ...props }) {
 					small
 					bold
 				/>
-				<div></div>
 			</div>
 		</div>
 	);
 }
 
+/**Estilos */
 const useStyles = createUseStyles({
 	container: {
 		color: "black",

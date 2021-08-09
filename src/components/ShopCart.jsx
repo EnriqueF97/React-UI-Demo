@@ -11,20 +11,24 @@ export default function ShopCart(props) {
 	const dispatch = useDispatch();
 	const classes = useStyles(props);
 
+	/**Funcion para borrar todos los items de la store */
 	const deleteItems = () => {
 		dispatch(deleteAllItems());
 	};
 	return (
 		<div className={classes.container}>
+			{/* Checa si el count de la store es mayor a 0, para mostrar esta vista o la de no hay productos */}
 			{shopCartCount > 0 ? (
 				<>
 					<div className={classes.title}>
 						<span>Checkout</span>
 					</div>
+					{/* Cada elemento que tiene la store, se renderiza con un componente CartItem */}
 					<div className={classes.itemList}>
 						{shopCartItems.map((item, id) => (
 							<CartItem item={item} idx={id}></CartItem>
 						))}
+						{/* Boton de eliminar todos los items de la store */}
 						<Button
 							backgroundColor='#910106'
 							fontColor='white'
@@ -36,23 +40,16 @@ export default function ShopCart(props) {
 				</>
 			) : (
 				<>
+					{/* Si no hay elementos en el carrito */}
 					<div style={{ fontSize: "1.5em", margin: "5vmin 0 5vmin" }}>
 						<span>¡No tienes ningún elemento en tu carrito!</span>
 					</div>
 				</>
 			)}
-			{/* <div>
-				<Button
-					func={() => deleteItems()}
-					text='Borrar todos'
-					backgroundColor='#910106'
-					fontColor='#e3e3e3'
-				/>
-			</div> */}
 		</div>
 	);
 }
-
+/**Estilos */
 const useStyles = createUseStyles({
 	container: {
 		background: "#2b2b2b",
