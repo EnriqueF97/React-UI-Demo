@@ -86,9 +86,9 @@ const useStyles = createUseStyles({
 		color: "lightGray",
 	},
 	container: {
-		width: "80%",
+		width: "100%",
 		height: "100%",
-		minHeight: "75vh",
+		minHeight: "80vh",
 		alignItems: "center",
 		justifyContent: "left",
 		margin: "auto",

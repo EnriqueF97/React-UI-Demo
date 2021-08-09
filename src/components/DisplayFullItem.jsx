@@ -20,9 +20,8 @@ export default function DisplayFullItem({ data }) {
 	};
 
 	const printArray = (data) => {
-		//console.log("printing", data);
 		const listItems = data.map((item) => <span style={{ fontSize: "0.6em", display: "block" }}>{item}</span>);
-		//console.log("printing", listItems[0]);
+
 		return listItems.length;
 	};
 
@@ -68,7 +67,7 @@ export default function DisplayFullItem({ data }) {
 		return <span>{listItems}</span>;
 	};
 
-	const sparePrintObjectFunction = () => {
+	const sparePrintObjectFunction = (data) => {
 		const listItems = Object.keys(data).map((key) => (
 			<>
 				{typeof data[key] !== "object" && data[key].constructor !== Array ? (
@@ -124,13 +123,7 @@ export default function DisplayFullItem({ data }) {
 			<div style={{}}>
 				<div className={classes.infoContainer}>{printObject(data)}</div>
 			</div>
-			<div
-				style={{
-					marginLeft: "0 5vmin",
-					textAlign: "center",
-					justifyContent: "center",
-					display: "inline-block",
-				}}>
+			<div className={classes.addItemContainer}>
 				<Button
 					backgroundColor='#d2ff2e'
 					text='Añadir al carrito'
@@ -181,5 +174,11 @@ const useStyles = createUseStyles({
 	spanContent: {
 		fontSize: "calc(5px + 2vmin)",
 		color: "#0ecf00",
+	},
+	addItemContainer: {
+		marginTop: "5vh",
+		textAlign: "center",
+		justifyContent: "center",
+		display: "inline-block",
 	},
 });
