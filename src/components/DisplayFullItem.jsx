@@ -125,7 +125,7 @@ export default function DisplayFullItem({ data }) {
 			</div>
 			<div className={classes.addItemContainer}>
 				<Button
-					backgroundColor='#d2ff2e'
+					backgroundColor='#4eba06'
 					text='Añadir al carrito'
 					func={() => {
 						addItemToStore(data);

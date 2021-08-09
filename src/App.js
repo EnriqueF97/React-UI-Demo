@@ -88,12 +88,12 @@ const useStyles = createUseStyles({
 	container: {
 		width: "100%",
 		height: "100%",
-		minHeight: "80vh",
+		minHeight: "100vh",
 		alignItems: "center",
 		justifyContent: "left",
 		margin: "auto",
 		textAlign: "center",
-		padding: "5vh 0",
+		padding: "15vh 0",
 	},
 });
 

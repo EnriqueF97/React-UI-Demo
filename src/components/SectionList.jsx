@@ -89,7 +89,7 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 					</div>
 				</>
 			) : (
-				<div style={{ height: "100%", paddingInline: "2vmin" }}>
+				<div className={classes.paginationContainer}>
 					{/* show the posts, 10 posts at a time */}
 					<div>
 						{getPaginatedData().map((data, idx) => (
@@ -138,6 +138,13 @@ export default function SectionList({ apiSection, onSelect, ...props }) {
 }
 
 const useStyles = createUseStyles({
+	paginationContainer: {
+		height: "100%",
+		width: "50vmin",
+		margin: "auto",
+		marginTop: "2em",
+		border: "1em",
+	},
 	pagination: {
 		display: "flex",
 		alignItems: "center",

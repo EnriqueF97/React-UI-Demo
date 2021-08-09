@@ -39,8 +39,12 @@ const useStyles = createUseStyles({
 		borderRadius: (props) => (props.small ? "5px" : "8px"),
 		fontSize: (props) => (props.small ? "calc(7px + 1vmin)" : "calc(9px + 1 vmin)"),
 		color: (props) => props.fontColor,
+		boxSizing: "border-box",
 		"&:hover": {
 			cursor: "pointer",
+			background: "#ba8d06",
+			transition: "background .2s",
+			color: "black",
 		},
 		fontWeight: (props) => (props.bold ? "bold" : ""),
 	},
@@ -54,6 +58,7 @@ const useStyles = createUseStyles({
 		borderRadius: (props) => (props.small ? "5px" : "8px"),
 		fontSize: (props) => (props.small ? "calc(7px + 1vmin)" : "calc(9px + 1 vmin)"),
 		color: (props) => props.fontColor,
+		boxSizing: "border-box",
 		"&:hover": {
 			cursor: "pointer",
 		},

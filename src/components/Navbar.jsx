@@ -3,7 +3,8 @@ import { createUseStyles } from "react-jss";
 import { useHistory, useLocation } from "react-router-dom";
 import Button from "./Button";
 import NavbarButton from "./NavbarButton";
-import { useSelector, useDispatch } from "react-redux";
+import Logo from "../assets/LogoFit.png";
+import { useSelector } from "react-redux";
 
 export default function Navbar(props) {
 	const history = useHistory();
@@ -11,7 +12,6 @@ export default function Navbar(props) {
 	const classes = useStyles();
 	const count = useSelector((state) => state.shopCart.count);
 	const [links, setLinks] = React.useState([
-		{ ref: "/", text: "Inicio", key: "inicio", active: true },
 		{ ref: "/catalog", text: "Personajes", key: "character", active: false },
 		{ ref: "/catalog", text: "Ubicaciones", key: "location", active: false },
 		{ ref: "/catalog", text: "Episodios", key: "episode", active: false },
@@ -47,30 +47,61 @@ export default function Navbar(props) {
 	 */
 
 	return (
-		<ul className={classes.ul}>
-			{links.map((link) => (
-				<NavbarButton
-					key={link.key}
-					active={link.active}
-					text={link.text}
-					onSelect={() => handleOnSelect(link)}
-				/>
-			))}
-			<div style={{ height: "100%", display: "flex", float: "right", padding: "auto 0" }}>
-				<Button
-					text={`Cart: ${count}`}
-					backgroundColor='#e3a600'
-					key={"cart"}
-					func={() => {
-						handleOnSelect({ ref: "/cart", key: "cart" });
-					}}
-				/>
-			</div>
-		</ul>
+		<div className={classes.navbar}>
+			<ul className={classes.ul}>
+				<li className={classes.li} style={{ height: "100%" }}>
+					<div className={classes.imageContainer}>
+						<img
+							onClick={() => handleOnSelect({ ref: "/", key: "inicio" })}
+							className={classes.image}
+							src={Logo}
+							alt='logo'
+						/>
+					</div>
+				</li>
+				{links.map((link) => (
+					<NavbarButton
+						key={link.key}
+						active={link.active}
+						text={link.text}
+						onSelect={() => handleOnSelect(link)}
+					/>
+				))}
+				<div style={{ height: "100%", display: "flex", float: "right", padding: "auto 0" }}>
+					<Button
+						text={`Cart: ${count}`}
+						backgroundColor='#e3a600'
+						key={"cart"}
+						func={() => {
+							handleOnSelect({ ref: "/cart", key: "cart" });
+						}}
+						bold
+					/>
+				</div>
+			</ul>
+		</div>
 	);
 }
 
 const useStyles = createUseStyles({
+	navbar: {
+		position: "fixed",
+		width: "100%",
+		borderBottom: "3px solid black",
+	},
+	imageContainer: {
+		margin: "1vmin",
+		paddingInline: "1vmin",
+		width: "100%",
+	},
+	image: {
+		maxHeight: "5vmin",
+		borderRadius: "8px",
+		objectFit: "contain",
+		"&:hover": {
+			cursor: "pointer",
+		},
+	},
 	ul: {
 		listStyleType: "none",
 		margin: "0",
