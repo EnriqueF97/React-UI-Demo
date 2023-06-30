@@ -1,6 +1,7 @@
 ## Descripción
 
-Reto personal de Agosto 2021, duracion: 12 hrs
+Reto personal de Agosto 2021, duracion: 12 hrs.
+
 Un proyecto con React.js con diseño responsivo minimalista, donde se muestran algunos personajes y entidades del universo de Rick & Morty utilizando la API REST de Rick & Morty. Este proyecto fue creado con el comando [Create React App](https://github.com/facebook/create-react-app).
 
 ## Contribuidor
